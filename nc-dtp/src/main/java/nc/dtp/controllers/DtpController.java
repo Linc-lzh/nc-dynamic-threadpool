@@ -5,6 +5,7 @@ import nc.dtp.core.properties.ThreadPoolProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DtpController implements ApplicationEventPublisherAware {
     ApplicationEventPublisher applicationEventPublisher;
     @PostMapping("/refresh")
-    public String refresh(ThreadPoolProperties properties) {
+    public String refresh(@RequestBody ThreadPoolProperties properties) {
         applicationEventPublisher.publishEvent(new DtpEvent(properties));
         return "success!";
     }
